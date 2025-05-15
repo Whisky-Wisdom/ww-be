@@ -1,0 +1,19 @@
+# Python Bytecode files
+
+venv/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+
+# VS Code settings
+.vscode/
+
+# IDEs
+.idea/
+*.iml
+
+
