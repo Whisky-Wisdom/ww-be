@@ -7,14 +7,16 @@
 python3.11 -m venv venv
 ```
 
-
 가상 환경 실행
 ```bash
 source venv/bin/activate
 ```
+pip install -r requirements.txt
+
+
 
 1855 포트로 실행
 
 ```bash
-uvicorn main:app --reload --port 1855
+uvicorn app.main:app --reload --port 1855
 ```

@@ -1,4 +1,7 @@
-fastapi
-uvicorn
-pydub
-yt_dlp
+uvicorn==0.34.2
+yt_dlp==2025.04.30
+fastapi==0.115.12
+whisper==1.1.10
+pydub==0.25.1
+torch==2.7.0
+openai-whisper==20240930

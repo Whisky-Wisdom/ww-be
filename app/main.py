@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Response
-from api.v1 import whisky_router
+from app.api.v1 import whisky_router
 
 
 app = FastAPI()
