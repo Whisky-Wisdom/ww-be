@@ -21,17 +21,17 @@ def process_youtube_url_to_text_ocr(url):
 
     if frames:
         cv2.imwrite("first_frame.png", frames[20])  # n 번째 프레임을 저장
+    #
+    # if frames:
+    #     debug_text = extract_text_from_frame(frames[20], save_debug_image=True, debug_filename="frame20_debug.png")
+    #     print(f"20번째 프레임 OCR 결과: {debug_text}")
 
-    if frames:
-        debug_text = extract_text_from_frame(frames[20], save_debug_image=True, debug_filename="frame20_debug.png")
-        print(f"20번째 프레임 OCR 결과: {debug_text}")
-
-    # for i, frame in tqdm(enumerate(frames), total=len(frames), desc="프레임 처리 중"):
-    #     # 프레임에서 텍스트 추출
-    #     text = extract_text_from_frame(frame)
-    #     if text:
-    #         print(f"{i}번째 프레임에서 텍스트 발견: {text}")
-    #         extracted_data.append(text)
+    for i, frame in tqdm(enumerate(frames), total=len(frames), desc="프레임 처리 중"):
+        # 프레임에서 텍스트 추출
+        text = extract_text_from_frame(frame)
+        if text:
+            print(f"{i}번째 프레임에서 텍스트 발견: {text}")
+            extracted_data.append(text)
 
     # 동영상 파일 삭제
     os.remove(mp4_file)
