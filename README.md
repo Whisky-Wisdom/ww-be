@@ -4,6 +4,10 @@
 가상환경 설치(3.11 ver 로 만들것!) 이름 바꿀시 깃 이그노어 해주세요 
 
 ```bash
+sudo apt update
+sudo apt install python3.11
+
+
 python3.11 -m venv venv
 ```
 
