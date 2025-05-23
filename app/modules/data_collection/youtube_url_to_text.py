@@ -10,8 +10,10 @@ def process_youtube_url_to_text(url):
 
 
     # 동영상 다운로드
-    mp4_file = download_video(url)
+    mp4_file, upload_date = download_video(url)
     print("동영상 다운 완료")
+    print(f"업로드 날짜: {upload_date[:4]}-{upload_date[4:6]}-{upload_date[6:]}")
+
     # 오디오 추출
     audio_file = extract_audio_from_video(mp4_file)
     print("오디오 추출 완료")
@@ -26,7 +28,10 @@ def process_youtube_url_to_text(url):
     
     print("파일 삭제 완료")
 
-    return {"text": text}
+    return {
+        "date": upload_date ,
+        "text": text
+            }
 
 
 
@@ -39,8 +44,9 @@ def download_video(url):
         'outtmpl': filename,
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
-    return filename
+        info_dict = ydl.extract_info(url, download=True)
+        upload_date = info_dict.get('upload_date', 'unknown')  # 예: '20230519'
+    return filename, upload_date
 
 # 2. MP4 파일에서 오디오를 추출
 def extract_audio_from_video(mp4_file):
