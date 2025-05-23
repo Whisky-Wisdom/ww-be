@@ -9,13 +9,14 @@ sudo apt install python3.11
 
 
 python3.11 -m venv venv
+
 ```
 
 가상 환경 실행
 ```bash
 source venv/bin/activate
 ```
-pip install -r requirements.txt
+pip install -r app/requirements.txt
 
 
 
