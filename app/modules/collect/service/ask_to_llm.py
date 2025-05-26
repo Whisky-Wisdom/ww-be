@@ -1,8 +1,6 @@
 from llama_cpp import Llama
-from tqdm import tqdm
 import os
 import json
-import re
 
 # LLM 질의 처리 함수
 def process_ask_to_llm(text: str) -> str:
@@ -15,7 +13,7 @@ def process_ask_to_llm(text: str) -> str:
 
 
 # 모델 경로 설정 (WSL 기준)
-model_path = "/mnt/d/models/nous/Nous-Hermes-2-Mistral-7B-DPO.Q4_K_M.gguf"
+model_path = "/mnt/d/models/DevQuasar/allenai.Llama-3.1-Tulu-3-8B-GGUF"
 
 # 모델 경로 유효성 검사
 if not os.path.exists(model_path):
@@ -46,6 +44,7 @@ def correct_typos(text: str) -> str:
         )
         result = llm(prompt, max_tokens=512, stop=["```"])
         corrected_chunks.append(result["choices"][0]["text"].strip())
+
     return "\n".join(corrected_chunks)
 
 
@@ -71,11 +70,11 @@ def process_pipeline(raw_text) :
     # 1단계: 오탈자 교정
     print("📘 1단계: 오탈자 및 명칭 정규화 중...")
     corrected = correct_typos(raw_text)
-
+    print(corrected)
     # 2단계: JSON 추출
     print("📗 2단계: JSON 추출 중...")
     json_text = extract_whisky_json(corrected)
-
+    print(json_text)
 
     return json_text
 

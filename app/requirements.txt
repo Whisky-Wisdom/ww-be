@@ -7,3 +7,4 @@ tqdm
 pymongo
 whisper
 pydub
+llama-cpp-python

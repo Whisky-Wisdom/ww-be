@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Response
-from app.api.v1 import whisky_router
+from app.api.v1.router import api_v1_router
 
 
 app = FastAPI()
@@ -9,8 +9,7 @@ def read_root():
     return {"message": "Hello FastAPI!"}
 
 
-app.include_router(whisky_router, prefix="/api/v1/whiskies")
-
+app.include_router(api_v1_router)
 
 
 # todo favicon 추가
