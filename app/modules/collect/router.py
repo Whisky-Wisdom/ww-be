@@ -1,22 +1,39 @@
 # app/modules/collect/router.py
 
 from fastapi import APIRouter, Request
-
-from app.modules.collect.service.cleanup_files import cleanup_files
-from app.modules.collect.service.download_video import download_video
-from app.modules.collect.service.extract_audio_from_video import extract_audio_from_video
-from app.modules.collect.service.transcribe_audio_to_text import transcribe_audio_to_text
+from app.modules.collect.service import (
+    cleanup_files,
+    download_video,
+    extract_audio_from_video,
+    transcribe_audio_to_text,
+)
+from app.modules.collect.service.ask_to_llm import process_ask_to_llm
 
 router = APIRouter(prefix="/collect")
 
-@router.get("/collect-data")
-def collect_data():
+
+@router.post("/health_check")
+async def process_collect_data(request: Request):
+    body = await request.json()
+    text = body.get("text")
+
+    return text
 
 
-    return {"message": "데이터 수집 완료"}
 
 
-@router.get("/process_youtube_url_to_text-data")
+@router.post("/process_collect_data")
+async def process_collect_data(request: Request):
+    body = await request.json()
+    text = body.get("text")
+
+    jsondata = process_ask_to_llm(text)
+
+
+    return jsondata
+
+
+@router.post("/process_youtube_url_to_text-data")
 async def process_youtube_url_to_text(request: Request):
     body = await request.json()
     url = body.get("url")

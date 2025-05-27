@@ -16,3 +16,8 @@ app.include_router(api_v1_router)
 @app.get("/favicon.ico", include_in_schema=False)
 def favicon():
     return Response(status_code=204)  # No Content
+
+# 서버 시작 시 메시지 출력
+@app.on_event("startup")
+async def startup_event():
+    print("✅ FastAPI 서버가 준비되었습니다.")
