@@ -1,3 +1,4 @@
+import Optional
 import firebase_admin
 from firebase_admin import credentials, firestore
 
@@ -7,19 +8,24 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # 브랜드 추가
-def add_brand(name: str):
+def add_brand(name: str, established_year:int, description: str = "", country: str = "",  ):
     brand_ref = db.collection("brands").add({
-        "name": name
+        "name": name,
+        "description": description,
+        "country": country,
+        "established_year": established_year
     })
-    return brand_ref[1].id  # 생성된 도큐먼트 ID 반환
+    return brand_ref[1].id
 
 # 위스키 추가
-def add_whisky(name: str, abv: float, genre: str, brand_id: str):
+def add_whisky(name: str, description: str , abv: float, genre: str, brand_id: str, cask_type:str):
     whisky_ref = db.collection("whiskies").add({
         "name": name,
+        "description": description,
         "abv": abv,
         "genre": genre,
-        "brand_id": brand_id
+        "brand_id": brand_id,
+        "cask_type":cask_type
     })
     return whisky_ref[1].id
 
@@ -65,6 +71,6 @@ if __name__ == "__main__":
     add_price(whisky_id, 2025, 7, location_id, 180000)
 
     # 평가 추가
-    add_tasting_note(user_id="user_123", whisky_id=whisky_id, note="부드럽고 과일향이 인상적임")
+    # add_tasting_note(user_id="user_123", whisky_id=whisky_id, note="부드럽고 과일향이 인상적임")
 
     print("샘플 데이터가 업로드되었습니다.")
