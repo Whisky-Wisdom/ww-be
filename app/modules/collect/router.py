@@ -7,9 +7,13 @@ from app.modules.collect.service import (
     extract_audio_from_video,
     transcribe_audio_to_text,
 )
-from app.modules.collect.service.ask_to_llm import process_ask_to_llm
+# from app.modules.collect.service.ask_to_llm import process_ask_to_llm
 
 router = APIRouter(prefix="/collect")
+
+@router.get("/a")
+async def asdasdasd(request: Request):
+    return {"aaaa":"aaaaaaaaa"}
 
 
 @router.post("/health_check")
@@ -22,15 +26,15 @@ async def process_collect_data(request: Request):
 
 
 
-@router.post("/process_collect_data")
-async def process_collect_data(request: Request):
-    body = await request.json()
-    text = body.get("text")
-
-    jsondata = process_ask_to_llm(text)
-
-
-    return jsondata
+# @router.post("/process_collect_data")
+# async def process_collect_data(request: Request):
+#     body = await request.json()
+#     text = body.get("text")
+#
+#     jsondata = process_ask_to_llm(text)
+#
+#
+#     return jsondata
 
 
 @router.post("/process_youtube_url_to_text-data")
