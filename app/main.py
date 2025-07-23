@@ -42,7 +42,6 @@ async def read_root():
 app.include_router(api_v1_router)
 
 
-
 # todo favicon 추가
 @app.get("/favicon.ico", include_in_schema=False)
 def favicon():

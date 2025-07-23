@@ -8,3 +8,6 @@ pymongo
 whisper
 pydub
 llama-cpp-python
+requests
+python-dotenv
+google-generativeai
